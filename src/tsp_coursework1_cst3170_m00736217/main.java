@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 
 public class main {
@@ -26,7 +27,8 @@ public class main {
 	}
 	
 	public static void printTimer() {
-		System.out.println(String.format("Timer: %s ns", t));
+		long ts = TimeUnit.SECONDS.convert(t, TimeUnit.NANOSECONDS);
+		System.out.println(String.format("Timer: %s s", ts));
 	}
 	
 	public static File[] ls(String dir) {
@@ -59,15 +61,19 @@ public class main {
 		 HashMap<Integer, ArrayList<Integer>> city = new HashMap<Integer, ArrayList<Integer>>();
 		 int n = 0;
 		 ArrayList<Integer> coords = new ArrayList<Integer>(); 
+		 
 		 for (String data_set:training_sets) {
 			 data_set = data_set.strip();
 			 cities = new ArrayList<HashMap<Integer, ArrayList<Integer>>>();
+			 
 			 for (String _city:data_set.split("\n")) {
 				 String[] cs = _city.split(" ");
+				 
 				 for (int i = 0; i < cs.length; i += 3) {
 					 city = new HashMap<Integer, ArrayList<Integer>>();
 					 coords = new ArrayList<Integer>();
 					 n = Integer.parseInt(cs[i]);
+					 
 					 try {
 						 coords.add(Integer.parseInt(cs[i+1]));
 						 coords.add(Integer.parseInt(cs[i+2]));
@@ -84,20 +90,23 @@ public class main {
 	 }
 	 
 	@SuppressWarnings("null")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 	    File[]	training_sets_locals= ls("data");
 	    ArrayList<String> training_sets = new ArrayList<String>();
 	    ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>> training_data = new ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>>();
-		TSP tsp = new TSP();
 			
 		for (File set_local:training_sets_locals){
 			training_sets.add(cat(set_local));
 		}
+		
 		training_data = parse(training_sets);
+		
 		for (ArrayList<HashMap<Integer, ArrayList<Integer>>>data_set:training_data) {
 			startTimer();
+
+			System.out.println(TSP.solve(data_set));
+			
 			stopTimer();
-			System.out.println(tsp.solve(data_set));
 			printTimer();
 		}
 	}

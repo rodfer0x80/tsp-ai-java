@@ -10,6 +10,8 @@ public class TSP {
 		ArrayList<Integer> distance_travelled = new ArrayList<Integer>();
 		ArrayList<Integer> path = new ArrayList<Integer>();
 		ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
+		
+		
 		ret.add(distance_travelled);
 		ret.add(path);
 		return ret;
