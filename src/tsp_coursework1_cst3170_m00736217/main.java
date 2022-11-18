@@ -97,7 +97,7 @@ public class main {
 		for (ArrayList<HashMap<Integer, ArrayList<Integer>>>data_set:training_data) {
 			startTimer();
 			stopTimer();
-			System.out.println(data_set);
+			System.out.println(tsp.solve(data_set));
 			printTimer();
 		}
 	}

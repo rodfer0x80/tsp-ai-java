@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class TSP {
 	
-	public static ArrayList<ArrayList<Integer>> solve(ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>> data_set){
+	public static ArrayList<ArrayList<Integer>> solve(ArrayList<HashMap<Integer, ArrayList<Integer>>> data_set){
 		ArrayList<Integer> distance_travelled = new ArrayList<Integer>();
 		ArrayList<Integer> path = new ArrayList<Integer>();
 		ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
