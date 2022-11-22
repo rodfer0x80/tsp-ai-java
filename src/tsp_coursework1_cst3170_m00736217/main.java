@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 
@@ -55,45 +56,33 @@ public class main {
 		 return data;
 	 }
 	 
-	 public static ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>> parse(ArrayList<String> training_sets){
-		 ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>> training_data = new ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>>();
-		 ArrayList<HashMap<Integer, ArrayList<Integer>>> cities = new ArrayList<HashMap<Integer, ArrayList<Integer>>>();
-		 HashMap<Integer, ArrayList<Integer>> city = new HashMap<Integer, ArrayList<Integer>>();
-		 int n = 0;
-		 ArrayList<Integer> coords = new ArrayList<Integer>(); 
+	 public static ArrayList<Stack<Integer>> parse(ArrayList<String> training_data){
+		 ArrayList<Stack<Integer>> training_sets = new ArrayList<Stack<Integer>>();
 		 
-		 for (String data_set:training_sets) {
+		 
+		 for (String data_set:training_data) {
+			 Stack<Integer> set = new Stack<Integer>();
 			 data_set = data_set.strip();
-			 cities = new ArrayList<HashMap<Integer, ArrayList<Integer>>>();
-			 
-			 for (String _city:data_set.split("\n")) {
-				 String[] cs = _city.split(" ");
-				 
-				 for (int i = 0; i < cs.length; i += 3) {
-					 city = new HashMap<Integer, ArrayList<Integer>>();
-					 coords = new ArrayList<Integer>();
-					 n = Integer.parseInt(cs[i]);
-					 
-					 try {
-						 coords.add(Integer.parseInt(cs[i+1]));
-						 coords.add(Integer.parseInt(cs[i+2]));
-						 city.put(n, coords); 
-						 cities.add(city);
-					 } catch (ArrayIndexOutOfBoundsException e) {
-						 break;
-					 }
+			 for (String city:data_set.split("\n")) {
+				 String[] cs;
+				 cs = city.split(" ");
+				 for (String n:cs) {
+					 set.push(Integer.valueOf(n));
 				 }
 			 }
-			 training_data.add(cities);
+			 training_sets.add(set);
 		 }
-		 return training_data;
+		for (Stack<Integer> s:training_sets) {
+			System.out.println(s);
+		}
+		 return training_sets;
 	 }
 	 
 	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
 	    File[]	training_sets_locals= ls("data");
 	    ArrayList<String> training_sets = new ArrayList<String>();
-	    ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>> training_data = new ArrayList<ArrayList<HashMap<Integer, ArrayList<Integer>>>>();
+	    ArrayList<Stack<Integer>> training_data = new ArrayList<Stack<Integer>>();
 			
 		for (File set_local:training_sets_locals){
 			training_sets.add(cat(set_local));
@@ -101,7 +90,7 @@ public class main {
 		
 		training_data = parse(training_sets);
 		
-		for (ArrayList<HashMap<Integer, ArrayList<Integer>>>data_set:training_data) {
+		for (Stack<Integer> data_set:training_data) {
 			startTimer();
 
 			System.out.println(TSP.solve(data_set));

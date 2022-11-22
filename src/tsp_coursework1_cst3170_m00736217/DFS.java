@@ -3,14 +3,14 @@ package tsp_coursework1_cst3170_m00736217;
 import java.util.Stack;
 
 // TSP sub optimal method using DFS heuristic
-class SubOptimalDfsTSP {
+public class DFS {
     private int n; // Representing the total vertices of the graph
     private int [][] graph; // Representing the adjacency matrix of the graph
     private boolean[] visitedVertices; // Representing which vertices have been currently visited
     private int shortestPathCost; // Representing the total cost of the path taken
     private Vertex lastVertex; // The last visited vertex before reaching the root again (Contains pointers with the path taken)
 
-    SubOptimalDfsTSP(int[][] graph)
+    public DFS(int[][] graph)
     {
         this.n = graph.length;
         this.graph = graph;
@@ -23,7 +23,7 @@ class SubOptimalDfsTSP {
     }
 
     // Returns an integer representing the shortest's path cost
-    int getShortestPathCost()
+    public int getShortestPathCost()
     {
         dfs(new Vertex(0,null,0),  1);
         return shortestPathCost;
@@ -31,7 +31,7 @@ class SubOptimalDfsTSP {
 
     // Method to find the shortest path, searching in depth, adding the closest vertex each time
     // (assuming there is always a route from one vertex to another since we have to do with a complete graph)
-    private void dfs(Vertex currentVertex, int verticesVisited)
+    public void dfs(Vertex currentVertex, int verticesVisited)
     {
         // If the path contains all vertices return the with the path found
         if (verticesVisited == n && graph[currentVertex.getId()][0] > 0)
@@ -67,7 +67,7 @@ class SubOptimalDfsTSP {
     }
 
     // Returns a Stack of integers representing the path of the best shortest route to take
-    Stack<Integer> getShortestPath() {
+    public Stack<Integer> getShortestPath() {
 
         Stack<Integer> shortestPath = new Stack<>();
         shortestPath.push(0);
