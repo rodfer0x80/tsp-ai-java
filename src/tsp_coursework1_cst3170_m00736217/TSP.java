@@ -11,11 +11,12 @@ public class TSP {
 		ArrayList<Integer> ret_distance = new ArrayList<Integer>();
 		int distance_travelled = 0;
 
-		//DFS tsp_dfs = new DFS(data_set);
-
-		//distance_travelled = tsp_dfs.getShortestPathCost();
+		TSPDFS tsp_dfs = new TSPDFS(data_set);
+		tsp_dfs.runme();
+		
+		distance_travelled = tsp_dfs.getShortestPathCost();
 		ret_distance.add(distance_travelled);
-		//ret_path = tsp_dfs.getShortestPath();
+		ret_path = tsp_dfs.getShortestPath();
 
 		ret.add(ret_distance);
 		ret.add(ret_path);
