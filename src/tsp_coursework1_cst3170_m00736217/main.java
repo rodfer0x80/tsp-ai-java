@@ -93,6 +93,7 @@ public class main {
 				
 			 }
 			 System.out.println(distances); 
+			 // fucking hell we need to get distances for each city to eachother smartly cuz we only have each distance once on the stack
 //			 for (String city:data_set.split("\n")) {
 //				 String[] cs;
 //				 cs = city.split(" ");
