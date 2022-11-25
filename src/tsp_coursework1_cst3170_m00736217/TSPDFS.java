@@ -6,19 +6,20 @@ import java.util.Stack;
 public class TSPDFS {
 	private int shortest_path_cost;
 	private ArrayList<Integer> shortest_path;
+	
 	private Stack<Integer> coords;
+	private int n;
+	private boolean[] visited_vertices;
+	private Object last_vertex;
 	
     public TSPDFS(Stack<Integer> coords)
     {
     	this.coords = coords;
-//        this.n = graph.length;
-//        this.graph = graph;
-//        this.visitedVertices = new boolean[n];
-//        this.shortestPathCost = Integer.MAX_VALUE;
-//        this.lastVertex = null;
-
-//        // Mark first vertex as visited since we use it as the root
-//        visitedVertices[0] = true;
+    	this.n = coords.size();
+    	this.visited_vertices = new boolean[n];
+    	this.shortest_path_cost = Integer.MAX_VALUE;
+    	this.last_vertex = null;
+    	this.visited_vertices[0] = true; // root vertix should be marked from start
     }
 	
 	public int getShortestPathCost() 
@@ -36,9 +37,5 @@ public class TSPDFS {
 		return 0;
 	}
 	
-	private int euclideanDistance(int p, int q)
-	{
-		return (int) Math.sqrt(p^2*q^2);
-	}
 }
 

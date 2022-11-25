@@ -1,9 +1,27 @@
 package tsp_coursework1_cst3170_m00736217;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Stack;
 
 public class TSP {
+	
+	private final Map<String, Map<String, Integer>> distances;
+	
+    public TSP(Map<String, Map<String, Integer>> distances) {
+        this.distances = distances;
+    }
+    
+    public static <T> void swap(T[] array, int first, int second) {
+        T temp = array[first];
+        array[first] = array[second];
+        array[second] = temp;
+    }
+    
+	private int euclideanDistance(int p, int q)
+	{
+		return (int) Math.sqrt(p^2*q^2);
+	}
 	
 	public static ArrayList<ArrayList<Integer>> solve(Stack<Integer> data_set){
 		ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
