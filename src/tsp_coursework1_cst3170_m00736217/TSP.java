@@ -18,10 +18,6 @@ public class TSP {
         array[second] = temp;
     }
     
-	private int euclideanDistance(int p, int q)
-	{
-		return (int) Math.sqrt(p^2*q^2);
-	}
 	
 	public static ArrayList<ArrayList<Integer>> solve(Stack<Integer> data_set){
 		ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
