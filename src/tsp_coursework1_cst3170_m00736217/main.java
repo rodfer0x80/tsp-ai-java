@@ -1,5 +1,6 @@
 package tsp_coursework1_cst3170_m00736217;
 
+import java.util.Collections;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -64,36 +65,40 @@ public class main {
 	{
 			return Math.sqrt((Math.pow(x2-x1, 2))+(Math.pow(y2-y1, 2)));
 	}
+	
+	public static void reverseStack(Stack<Double> stack){
+        stack.sort(Collections.reverseOrder());
+	}
 	 
-	 public static HashMap<String, HashMap<String, Integer>> parse(ArrayList<String> training_data){
-		 HashMap<String, HashMap<String, Integer>> training_sets = new HashMap<String, HashMap<String, Integer>>();
-		 ArrayList<String> _data_set = new ArrayList<String>();
+	public static HashMap<String, HashMap<String, Integer>> parse(ArrayList<String> training_data){
+		HashMap<String, HashMap<String, Integer>> training_sets = new HashMap<String, HashMap<String, Integer>>();
+		ArrayList<String> _data_set = new ArrayList<String>();
 		 
-		 for (String data_set:training_data)
-		 {
-			 HashMap<String, Integer> set = new HashMap<String, Integer>();
-			 data_set = data_set.strip();
+		for (String data_set:training_data)
+		{
+			HashMap<String, Integer> set = new HashMap<String, Integer>();
+			data_set = data_set.strip();
 			 
-			 int i = 0;
-			 Stack<Double> distances = new Stack<Double>(); 
-			 for (String city:data_set.split("\n"))
-			 { 
-				 i++;
-				 for (int ii = i; ii < data_set.split("\n").length; ii++)
-				 {
-					 //System.out.println(ii);
-					 //System.out.print(data_set.split("\n")[ii-1].split(" ")[2]);
-					 distances.push(euclideanDistance(
-							 Integer.parseInt(city.split(" ")[1]),
-							 Integer.parseInt(city.split(" ")[2]),
-							 Integer.parseInt(data_set.split("\n")[ii].split(" ")[1]), 
-							 Integer.parseInt(data_set.split("\n")[ii].split(" ")[2])
-							 ));
-				 }
-				
-			 }
-			 System.out.println(distances); 
-			 // fucking hell we need to get distances for each city to eachother smartly cuz we only have each distance once on the stack
+			int i = 0;
+			Stack<Double> distances = new Stack<Double>();
+			for (String city:data_set.split("\n"))
+			{ 
+				i++;
+				for (int ii = i; ii < data_set.split("\n").length; ii++)
+				{
+					//System.out.println(ii);
+					//System.out.print(data_set.split("\n")[ii-1].split(" ")[2]);
+					distances.push(euclideanDistance(
+							Integer.parseInt(city.split(" ")[1]),
+							Integer.parseInt(city.split(" ")[2]),
+							Integer.parseInt(data_set.split("\n")[ii].split(" ")[1]), 
+							Integer.parseInt(data_set.split("\n")[ii].split(" ")[2])
+							));
+				}	
+			}
+			reverseStack(distances);
+			System.out.println(distances); 
+			// fucking hell we need to get distances for each city to eachother smartly cuz we only have each distance once on the stack
 //			 for (String city:data_set.split("\n")) {
 //				 String[] cs;
 //				 cs = city.split(" ");
