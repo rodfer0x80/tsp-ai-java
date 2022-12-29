@@ -86,8 +86,6 @@ public class main {
 				i++;
 				for (int ii = i; ii < data_set.split("\n").length; ii++)
 				{
-					//System.out.println(ii);
-					//System.out.print(data_set.split("\n")[ii-1].split(" ")[2]);
 					distances.push(euclideanDistance(
 							Integer.parseInt(city.split(" ")[1]),
 							Integer.parseInt(city.split(" ")[2]),
@@ -98,6 +96,11 @@ public class main {
 			}
 			reverseStack(distances);
 			System.out.println(distances); 
+			// map distances to city pairs
+			// make a combination of cities
+			// map to distances
+			
+			
 			// fucking hell we need to get distances for each city to eachother smartly cuz we only have each distance once on the stack
 //			 for (String city:data_set.split("\n")) {
 //				 String[] cs;
